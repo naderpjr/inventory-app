@@ -11,7 +11,16 @@ export default async function InventoryPage({ searchParams }: { searchParams: Pr
     const params = await searchParams
     const q = (params.q ?? "").trim();
 
-    const totalProducts = await prisma.product.findMany({ where: { userId, name: { contains: q, mode: "insensitive" } } });
+    const where = {
+        userId,
+        ...(q ? { name: { contains: q, mode: "insensitive" as const } } : {}),
+    }
+
+    const totalProducts = await prisma.product.findMany({ where });
+
+    const [] = await Promise.all([
+        prisma.product.count({ where })
+    ])
 
     return (
         <div className="min-h-screen bg-gray-50">
