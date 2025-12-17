@@ -47,7 +47,7 @@ export default function Pagination({ currentPage, totalPages, baseUrl, searchPar
     const visiblePages = getVisiblePages();
 
     return <nav className="flex items-center justify-center gap-1">
-        <Link href="" className={`flex items-center px-3 py-2 text-sm font-medium rounded-lg ${currentPage <= 1 ?
+        <Link href={getPageUrl(currentPage - 1)} className={`flex items-center px-3 py-2 text-sm font-medium rounded-lg ${currentPage <= 1 ?
             "text-gray-400 cursor-not-allowed bg-gray-100" :
             "text-gray-700 hover:bg-gray-100 bg-white border border-gray-300"}`} aria-disabled={currentPage <= 1}>
             <ChevronLeft /> Previous
@@ -66,7 +66,7 @@ export default function Pagination({ currentPage, totalPages, baseUrl, searchPar
             const pageNumber = page as number;
             const isCurrentPage = pageNumber === currentPage;
 
-            return <Link key={key} href={"/"} className={`px-3 py-2 text-sm font-medium rounded-lg ${isCurrentPage ? "bg-purple-600 text-white" : "text-gray-700 hover:bg-gray-100 bg-white border border-gray-300"}`}>{pageNumber}</Link>
+            return <Link key={key} href={getPageUrl(pageNumber)} className={`px-3 py-2 text-sm font-medium rounded-lg ${isCurrentPage ? "bg-purple-600 text-white" : "text-gray-700 hover:bg-gray-100 bg-white border border-gray-300"}`}>{pageNumber}</Link>
         })}
 
         <Link href={getPageUrl(currentPage + 1)} className={`flex items-center px-3 py-2 text-sm font-medium rounded-lg ${currentPage >= totalPages ?
