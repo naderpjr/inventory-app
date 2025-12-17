@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import Pagination from "@/components/pagination";
 import Sidebar from "@/components/Sidebar";
 import { deleteProduct } from "@/lib/actions/products";
